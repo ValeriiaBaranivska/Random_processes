@@ -8,14 +8,14 @@ import pandas as pd
 # Графік функції Kxt,t' для значень t,t' в діапазоні [0; 4] з кроком 0,1.
 
 # Визначаємо діапазон значень для t і t', D(U), M(U)
-d_u = 1.1
-m_u = 2.4
-t_vals = np.arange(0, 4.1, 0.1)
-t_prime_vals = np.arange(0, 4.1, 0.1)
+d_u =0.1
+m_u = 1
+t_vals = np.arange(0, 4, 0.1)
+t_prime_vals = np.arange(0, 4, 0.1)
 
 # Визначаємо функцію випадкового процесу
 def cos_func(x):
-    cos1 = np.cos(0.1 * x **2)
+    cos1 = np.e ** (-x**2)
 
     return cos1
 
@@ -67,7 +67,7 @@ plt.show()
 
 
 # Параметри
-D_U = 1.1
+D_U = 1
 t_values = np.arange(0, 4, 0.1)
 t_prime_values = np.arange(0, 4, 0.1)
 
@@ -75,7 +75,8 @@ t_prime_values = np.arange(0, 4, 0.1)
 T, T_prime = np.meshgrid(t_values, t_prime_values)
 
 # Кореляційна функція
-K_X = D_U * np.cos(np.cos(0.1 * T**2)) * np.cos(np.cos(0.1 * T_prime**2))
+K_X = D_U * (np.e**(- T ** 2) ) * (np.e ** (- T_prime ** 2))
+
 
 # Створення DataFrame для зберігання даних
 z_data = pd.DataFrame(K_X)
@@ -90,9 +91,9 @@ fig.update_layout(title='Кореляційна функція Kx(t, t\')',
                       zaxis_title='Kx(t, t\')',
                       xaxis_title='t',
                       yaxis_title='t\'',
-                      xaxis=dict(nticks=10, dtick=0.1, range=[0, 4], gridcolor='black', gridwidth=1),
-                      yaxis=dict(nticks=10, dtick=0.1, range=[0, 4], gridcolor='black', gridwidth=0.5),
-                      zaxis=dict(nticks=10, dtick=0.1, range=[0, 4], gridcolor='black', gridwidth=0.5)),
+                      xaxis=dict(nticks=10, dtick=0.5, range=[0, 3], gridcolor='black', gridwidth=1),
+                      yaxis=dict(nticks=10, dtick=0.5, range=[0, 3], gridcolor='black', gridwidth=0.5),
+                      zaxis=dict(nticks=10, dtick=0.5, range=[0, 3], gridcolor='black', gridwidth=0.5)),
                   colorway=["#70CA2A", "#E4B530", "#3A339F"])
 # Відображення графіка
 fig.show()
@@ -111,12 +112,12 @@ fig1 = Figure(data=[Surface(z=z_data1.values)])
 fig1.update_layout(title='Нормована кореляційна функція r_x(t, t\')',
                    autosize=False, width=1000, height=1000,
                    scene=dict(
-                       zaxis_title='Kx(t, t\')',
+                       zaxis_title='Rx(t, t\')',
                        xaxis_title='t',
                        yaxis_title='t\'',
-                       xaxis=dict(nticks=10, dtick=0.1, range=[0,4], gridcolor='black', gridwidth=1),
-                       yaxis=dict(nticks=10, dtick=0.1, range=[0,4], gridcolor='black', gridwidth=0.5),
-                       zaxis=dict(nticks=10, dtick=0.1, range=[0,4], gridcolor='black', gridwidth=0.5)),
+                       xaxis=dict(nticks=10, dtick=0.5, range=[0,3], gridcolor='black', gridwidth=1),
+                       yaxis=dict(nticks=10, dtick=0.5, range=[0,3], gridcolor='black', gridwidth=0.5),
+                       zaxis=dict(nticks=10, dtick=0.5, range=[0,3], gridcolor='black', gridwidth=0.5)),
                    colorway=["#70CA2A", "#E4B530", "#3A339F"])
 # Відображення графіка
 fig1.show()
